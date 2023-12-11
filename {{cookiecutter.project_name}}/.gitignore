@@ -1,0 +1,9 @@
+config.xml
+/venv
+/.venv
+/.vscode
+__pycache__/
+/logs/*
+!*/.gitkeep
+*.xml
+*.p12
