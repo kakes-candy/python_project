@@ -7,3 +7,4 @@ __pycache__/
 !*/.gitkeep
 *.xml
 *.p12
+config.toml

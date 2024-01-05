@@ -1,26 +1,34 @@
 import logging
 from logging import config
 from utils import logfileNamer
+from utils.config_parser import parse_config_file
+from pathlib import Path
+
+
+config_path = Path('config.toml')
+settings = parse_config_file(config_path)
+
 
 logroot = "./logs"
-logmail_ontvangers = ["n.kakes@hsk.nl"]
+logmail_ontvangers = settings.get('email_recipients', [])
+loglevel = settings.get('loglevel', 'DEBUG')
 
 filename = logfileNamer(path=logroot, basename="_{{cookiecutter.repo_name}}")
 
 
 log_config = {
     "version": 1,
-    "root": {"handlers": ["console", "file"], "level": "DEBUG"},
+    "root": {"handlers": ["console", "file"], "level": loglevel},
     "handlers": {
         "console": {
             "formatter": "std_out",
             "class": "logging.StreamHandler",
-            "level": "DEBUG",
+            "level": loglevel,
         },
         "file": {
             "formatter": "std_out",
             "class": "logging.FileHandler",
-            "level": "DEBUG",
+            "level": loglevel,
             "filename": filename,
         },
     },
