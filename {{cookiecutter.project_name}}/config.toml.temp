@@ -1,0 +1,17 @@
+target_environment = 'dev'
+
+[[enviroment]]
+    name = 'dev'
+    loglevel = 'DEBUG'
+    logroot = './logs'
+
+
+[[enviroment]]
+    name = 'prod'
+    loglevel = 'WARNING'
+    logroot = './logs'
+
+[[enviroment]]
+    name = 'acc'
+    loglevel = 'INFO'
+    logroot = './logs'    
