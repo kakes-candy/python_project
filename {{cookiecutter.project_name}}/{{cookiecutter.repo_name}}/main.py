@@ -1,13 +1,11 @@
-import logging
-from config.logging_config import log_config
+from pathlib import Path
+from config.logging_config import create_logger
 
 
 # -------------------------------------------------------------------------------------------------------
 # LOGGING Initialiseren
 # -------------------------------------------------------------------------------------------------------
-logging.config.dictConfig(log_config)
-rootlogger = logging.getLogger()
-rootlogger.setLevel(logging.DEBUG)
-log_filename = log_config.get('handlers').get('file').get('filename')
 
-rootlogger.info(f"logger initialised, logfilename: {log_filename}")
+logconfigfile = Path('config.toml')
+rootlogger = create_logger(logconfigfile)
+rootlogger.info("logger initialised")
