@@ -1,14 +1,19 @@
 from pathlib import Path
+import subprocess
 
-LOGCONFIGFILE_TEMP_NAME = 'config.toml.temp' 
-LOGCONFIGFILE_DEF_NAME = 'config.toml'
-
-temppath = Path(LOGCONFIGFILE_TEMP_NAME)
-defpath = Path(LOGCONFIGFILE_DEF_NAME)
-
-print(temppath)
-print(defpath)
+# rename config file
+temppath = Path('config.toml.temp')
+defpath = Path('config.toml')
 
 if temppath.exists():
-    print('file found')
     temppath.rename(defpath)
+
+# initiate uv project
+subprocess.run(['uv', 'init', '--bare', '--vcs', 'git'])
+
+# create a virtualenv
+subprocess.run(['uv', 'venv'])
+
+# commit created project to git
+subprocess.run(['git', 'add', '.'])
+subprocess.run(['git', 'commit', '-m', 'Initiated project {{cookiecutter.project_name}}'])
